@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{% block title %} Top news {% endblock %}</h1>
+    <p>{{ temperature }} &#8451; </p> 
+
+      
+    <div class="my-custom-scrollbar my-custom-scrollbar-primary">
+    <section class="grid">
+        {% for index in range(count) %}
+        <article class="grid-item">
+            <div class="image">
+                <img src={{ img[index] }} />
+            </div>
+            <div class="info ">
+                <a href= {{ links[index] }} class="text-dark">
+                    <h6 class="text-dark"> {{ title[index] }}</h6>
+                </a>
+                <div class="info-text">
+                    <p>{{ desc[index] }}</p> 
+                    <p>{{ datetime[index] }}</p>
+                </div>
+            </div>
+        </article>  
+        {% endfor %} 
+    </section>
+</div>
+    <div class="masonry-layout">
+    {% for post in posts %}
+        <div class="masonry-layout__panel">
+            <div class="masonry-layout__panel-content bg--black">
+
+                <a href="{{ url_for('post', post_id=post['id']) }}">
+                    <h2>{{ post['title'] }}</h2>
+                </a>
+                <p>
+                    <p>{{ post['content'] }}</p>
+                </p>
+                <span class="badge badge-primary">{{ post['created'] }}</span>
+                <a href="{{ url_for('edit', id=post['id']) }}">
+                    <span class="badge badge-warning">Edit</span>
+                </a>
+            </div>
+        </div>
+    {% endfor %} 
+    </div>
+
+
+
+{% endblock %}
